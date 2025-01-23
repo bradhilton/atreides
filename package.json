@@ -1,9 +1,10 @@
 {
-  "name": "atreides-turbo",
+  "name": "atreides",
   "private": true,
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "generate": "prisma generate",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -17,7 +18,10 @@
   },
   "packageManager": "npm@10.9.2",
   "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+    "app",
+    "typescript"
+  ],
+  "dependencies": {
+    "@prisma/client": "^6.2.1"
+  }
 }

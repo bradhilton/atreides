@@ -1,0 +1,21 @@
+{
+    "name": "@atreides/sdk",
+    "version": "0.1.0",
+    "private": true,
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "lint": "eslint src/",
+        "clean": "rm -rf .turbo node_modules dist",
+        "typecheck": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.5",
+        "eslint": "^8.56.0",
+        "tsup": "^8.0.1",
+        "typescript": "^5.3.3"
+    }
+}
