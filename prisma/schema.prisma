@@ -4,10 +4,6 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 generator python {
   provider             = "prisma-client-py"
   interface            = "asyncio"
@@ -15,11 +11,39 @@ generator python {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Dataset {
-  id   String @id @default(cuid())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  prompts Prompt[]
+}
+
+model Prompt {
+  id          Int          @id @default(autoincrement())
+  messages    String // JSON Array
+  metadata    String // JSON Object
+  datasets    Dataset[]
+  completions Completion[]
+}
+
+model Completion {
+  id        Int    @id @default(autoincrement())
+  prompt_id Int
+  prompt    Prompt @relation(fields: [prompt_id], references: [id])
+  model     String
+  results   String // JSON Array
+  // rewards   Reward[]
+}
+
+model Reward {
+  id          Int    @id @default(autoincrement())
+  // completion_id Int
+  // completion    Completion @relation(fields: [completion_id], references: [id])
+  title       String
+  description String
+  value       Float
+  weight      Float  @default(1.0)
 }

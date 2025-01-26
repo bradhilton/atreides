@@ -380,11 +380,13 @@
 #       nvidia\_gpus:
 #           disable\_ecc: ...
 
-workdir: .
-
 resources:
   accelerators: A10
 
 setup: |
+  cd ..
+  git clone https://github.com/bradhilton/atreides.git
+  cd atreides
   sudo snap install --classic astral-uv
   uv sync
+  
