@@ -381,7 +381,7 @@
 #           disable\_ecc: ...
 
 resources:
-  accelerators: A10
+  accelerators: A100
 
 setup: |
   cd ..
@@ -389,4 +389,3 @@ setup: |
   cd atreides
   sudo snap install --classic astral-uv
   uv sync
-  
