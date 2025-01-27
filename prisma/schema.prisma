@@ -35,15 +35,4 @@ model Completion {
   prompt    Prompt @relation(fields: [prompt_id], references: [id])
   model     String
   results   String // JSON Array
-  // rewards   Reward[]
-}
-
-model Reward {
-  id          Int    @id @default(autoincrement())
-  // completion_id Int
-  // completion    Completion @relation(fields: [completion_id], references: [id])
-  title       String
-  description String
-  value       Float
-  weight      Float  @default(1.0)
 }
