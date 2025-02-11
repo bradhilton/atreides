@@ -83,6 +83,16 @@ async def consume_chat_completion_stream(
                     choice.message.tool_calls[tool_call.index].function.arguments += (
                         tool_call.function.arguments or "" if tool_call.function else ""
                     )
+            if hasattr(chunk_choice.delta, "reasoning"):
+                if not hasattr(choice.message, "reasoning"):
+                    setattr(choice.message, "reasoning", "")
+                setattr(
+                    choice.message,
+                    "reasoning",
+                    getattr(choice.message, "reasoning")
+                    + getattr(chunk_choice.delta, "reasoning")
+                    or "",
+                )
         chat_completion.service_tier = chunk.service_tier
         chat_completion.system_fingerprint = chunk.system_fingerprint
         chat_completion.usage = chunk.usage
